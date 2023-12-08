@@ -1,6 +1,6 @@
 '''
 Program for drawing and saving stargons with 'a' points,
-connecting every 'b' points counter-clockwise,
+connecting every 'b' points clockwise,
 lying on a circle with radius 'r'.
 
 Can be used to quickly generate cases.
@@ -42,13 +42,14 @@ def save_stargon(a,b,r):
     plt.plot(x_vals, y_vals, 'bo', linestyle="-")
 
     path = str(os.getcwd())
-    subfolder = "\\{}-sided_stars".format(n)
+    subfolder = "\\a={}".format(n)
     if not os.path.exists(path+subfolder):
         os.makedirs(path+subfolder)
 
     dir = os.getcwd()
     #plt.savefig(path+subfolder+"\\a={}_b={}".format(a,b))
-    plt.savefig(path+subfolder+f"\\{a}_{b:02}")
+    digitsofa = len(str(a))
+    plt.savefig(path+subfolder+f"\\{a}_{b:0{digitsofa}}")
     plt.close()
     return
 
@@ -67,7 +68,7 @@ def draw_stargon(a,b,r):
     plt.close()
     return
 
-n = 10
+n = 15
 for k in range(n+1):
     save_stargon(n,k,1)
 
