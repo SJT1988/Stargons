@@ -86,6 +86,6 @@ def draw_stargon(a,b):
     plt.show()
     return
 
-n = 5
+n = 12
 for k in range(n+1):
     save_stargon(n,k)
