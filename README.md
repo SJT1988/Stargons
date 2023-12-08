@@ -1,2 +1,2 @@
 # Stargons
-Program for drawing and saving stargons with 'a' points, connecting every 'b' points counter-clockwise, lying on a circle with radius 'r'.  Can be used to quickly generate cases. First commit by Spencer Trumbore on December 07, 2023.
+Program for drawing and saving stargons with 'a' points, connecting every 'b' points counter-clockwise. Can be used to quickly generate and compare cases. Created by Spencer Trumbore on December 07, 2023.

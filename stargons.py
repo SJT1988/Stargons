@@ -1,9 +1,7 @@
 '''
 Program for drawing and saving stargons with 'a' points,
-connecting every 'b' points clockwise,
-lying on a circle with radius 'r'.
-
-Can be used to quickly generate cases.
+connecting every 'b' points counter-clockwise.
+Can be used to quickly generate and compare cases.
 First commit by Spencer Trumbore on December 07, 2023.
 '''
 
@@ -12,10 +10,10 @@ import math
 import matplotlib.pyplot as plt
 pi = math.pi
 
-def generate_points(a, radius):
+def generate_points(a):
     lst = []
     for i in range(a):
-        point = (radius*math.cos(i*2*math.pi/a), radius*math.sin(i*2*math.pi/a))
+        point = (math.cos(i*2*math.pi/a), math.sin(i*2*math.pi/a))
         lst.append(point)
     return lst
 
@@ -29,47 +27,65 @@ def order_points(b,pts):
         i = (i + b)%a
     return ordered_lst
 
-def save_stargon(a,b,r):
-    points = generate_points(a,r)
+def save_stargon(a,b):
+    points = generate_points(a)
     ordered_points = order_points(b%a, points)
-    plt.rcParams["figure.figsize"] = [5.00, 5.00]
-    plt.rcParams["figure.autolayout"] = True
 
+    # Plot settings
+    plt.rcParams["figure.figsize"] = [6.00, 6.00]
+    plt.rc('font', size=15)
+    plt.tight_layout(pad=.5) # increases padding
+    plt.axis('off')
+
+    # All points
+    p_x = [point[0] for point in points]
+    p_y = [point[1] for point in points]
+    plt.plot(p_x, p_y, 'o', color='black')
+    for (i, j) in zip(p_x, p_y):
+        plt.text(i*1.1, j*1.1, f'({p_x.index(i)})', ha='center', va='center')
+
+    # Connect ordered points
     ordered_points.append(ordered_points[0])
-    x_vals = [point[0] for point in ordered_points]
-    y_vals = [point[1] for point in ordered_points]
-
-    plt.plot(x_vals, y_vals, 'bo', linestyle="-")
+    op_x = [point[0] for point in ordered_points]
+    op_y = [point[1] for point in ordered_points]
+    plt.plot(op_x, op_y, 'bo', linestyle="-")
+    
 
     path = str(os.getcwd())
     subfolder = "\\a={}".format(n)
     if not os.path.exists(path+subfolder):
         os.makedirs(path+subfolder)
 
-    dir = os.getcwd()
-    #plt.savefig(path+subfolder+"\\a={}_b={}".format(a,b))
     digitsofa = len(str(a))
     plt.savefig(path+subfolder+f"\\{a}_{b:0{digitsofa}}")
     plt.close()
     return
 
-def draw_stargon(a,b,r):
-    points = generate_points(a,r)
+def draw_stargon(a,b):
+    points = generate_points(a)
     ordered_points = order_points(b%a, points)
-    plt.rcParams["figure.figsize"] = [5.00, 5.00]
-    plt.rcParams["figure.autolayout"] = True
 
+    # Plot settings
+    plt.rcParams["figure.figsize"] = [6.00, 6.00]
+    plt.rc('font', size=15)
+    plt.tight_layout(pad=.5) # increases padding
+    plt.axis('off')
+
+    # All points
+    p_x = [point[0] for point in points]
+    p_y = [point[1] for point in points]
+    plt.plot(p_x, p_y, 'o', color='black')
+    for (i, j) in zip(p_x, p_y):
+        plt.text(i*1.1, j*1.1, f'({p_x.index(i)})', ha='center', va='center')
+
+    # Connect ordered points
     ordered_points.append(ordered_points[0])
-    x_vals = [point[0] for point in ordered_points]
-    y_vals = [point[1] for point in ordered_points]
-
-    plt.plot(x_vals, y_vals, 'bo', linestyle="-")
+    op_x = [point[0] for point in ordered_points]
+    op_y = [point[1] for point in ordered_points]
+    plt.plot(op_x, op_y, 'bo', linestyle="-")
     plt.show()
-    plt.close()
     return
 
-n = 15
+n = 5
 for k in range(n+1):
-    save_stargon(n,k,1)
-
-#draw_stargon(5,2,1)
+    save_stargon(n,k)
