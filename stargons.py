@@ -41,14 +41,20 @@ def save_stargon(a,b):
     p_x = [point[0] for point in points]
     p_y = [point[1] for point in points]
     plt.plot(p_x, p_y, 'o', color='black')
-    for (i, j) in zip(p_x, p_y):
-        plt.text(i*1.1, j*1.1, f'({p_x.index(i)})', ha='center', va='center')
+    for i in range(a):
+        plt.text(p_x[i]*1.15,
+                 p_y[i]*1.15,
+                 f'({i})',
+                 ha='center',
+                 va='center',
+                 color = ('red' if i == b%a else 'blue'))
 
     # Connect ordered points
     ordered_points.append(ordered_points[0])
     op_x = [point[0] for point in ordered_points]
     op_y = [point[1] for point in ordered_points]
     plt.plot(op_x, op_y, 'bo', linestyle="-")
+    plt.plot(op_x, op_y, 'ro')
     
 
     path = str(os.getcwd())
@@ -74,15 +80,20 @@ def draw_stargon(a,b):
     # All points
     p_x = [point[0] for point in points]
     p_y = [point[1] for point in points]
-    plt.plot(p_x, p_y, 'o', color='black')
-    for (i, j) in zip(p_x, p_y):
-        plt.text(i*1.1, j*1.1, f'({p_x.index(i)})', ha='center', va='center')
+    for i in range(a):
+        plt.text(p_x[i]*1.15,
+                 p_y[i]*1.15,
+                 f'({i})',
+                 ha='center',
+                 va='center',
+                 color = ('red' if i == b%a else 'blue'))
 
     # Connect ordered points
     ordered_points.append(ordered_points[0])
     op_x = [point[0] for point in ordered_points]
     op_y = [point[1] for point in ordered_points]
     plt.plot(op_x, op_y, 'bo', linestyle="-")
+    plt.plot(op_x, op_y, 'ro')
     plt.show()
     return
 
